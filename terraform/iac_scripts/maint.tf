@@ -15,7 +15,6 @@ locals {
   }
 }
 
-#Step 0
 #Create Resource Group
 resource "azurerm_resource_group" "rg_databricks" {
   name     = "${local.prefix}-rg"
@@ -163,7 +162,6 @@ resource "databricks_cluster" "dtb_cluster" {
   depends_on = [azurerm_databricks_workspace.databricks_workspace]
 }
 
-#Step 7
 #upload csv to bronze container
 resource "azurerm_storage_blob" "uploadcsv" {
   name                   = "addresses.csv"
