@@ -7,5 +7,5 @@ output "databricks_host" {
 }
 
 output "output_app_storage_databricks_secret" {
-  value = azuread_application_password.app_storage_databricks_secret.key_id
+  value = azuread_application_password.app_storage_databricks_secret.value
 }
