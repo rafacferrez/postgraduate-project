@@ -20,5 +20,5 @@ variable "cluster_dev_name" {
 
 variable "storage_datalake" {
   type    = string
-  default = "rcfdevusdl"
+  default = "rcfdevusdlpa"
 }

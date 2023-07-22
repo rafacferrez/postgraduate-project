@@ -8,4 +8,5 @@ output "databricks_host" {
 
 output "output_app_storage_databricks_secret" {
   value = azuread_application_password.app_storage_databricks_secret.value
+  sensitive = true
 }
