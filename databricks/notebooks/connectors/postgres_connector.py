@@ -7,16 +7,17 @@ class PostgresConnector(Connector):
     """"This class makes the connection with the 
     postgres database"""
 
-    options = {
-        "host": dbutils.secrets.get("postgres", "url")
-        ,"port": dbutils.secrets.get("postgres", "port")
-        ,"user": dbutils.secrets.get("postgres", "user")
-        ,"password": dbutils.secrets.get("postgres", "password")
-    }
+    host = dbutils.secrets.get("psql", "host")
 
     def set_source(self):
+        options = {
+            "driver": "org.postgresql.Driver"
+            ,"url": f"jdbc:postgresql://{self.host}:5432/{self.db}"
+            ,"user": dbutils.secrets.get("psql", "user")
+            ,"password": dbutils.secrets.get("psql", "passwd")
+            ,"dbtable" : self.entity
+        }
+
         self.df = spark.read \
-            .format("postgresql") \
-            .options(self.options) \
-            .option("database", self.db) \
-            .option("dbtable", self.entity)
+            .format("jdbc") \
+            .options(**options)

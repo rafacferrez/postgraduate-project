@@ -3,7 +3,7 @@
 
 # COMMAND ----------
 
-# MAGIC %run ../../connectors/datalake_connector
+# MAGIC %run ../../connectors/postgres_connector
 
 # COMMAND ----------
 
@@ -21,11 +21,7 @@ class EntityPedido(Ingestion):
 
     @property
     def source_connector(self):
-        options = {"delimiter": ";",
-                   "encoding": "UTF-8",
-                   "header": True}
-        return DatalakeConnector("bronze", self.database_name,
-            "example_pedido", "csv", options)
+        return PostgresConnector("postgres", "pedido")
         
     
     def __cast_to_int(self, df):
